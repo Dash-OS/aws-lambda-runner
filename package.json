@@ -1,0 +1,37 @@
+{
+  "name": "aws-lambda-runner",
+  "version": "1.0.0",
+  "description": "Better handling of AWS Lambda Functions.",
+  "main": "dist/runner.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dash-OS/aws-lambda-runner/"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "cross-env BABEL_ENV=production NODE_ENV=production \"rimraf dist && webpack\""
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "apex",
+    "serverless",
+    "api-gateway"
+  ],
+  "author": "Braden R. Napier <brady.napier@dashos.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dash-OS/aws-lambda-runner/issues"
+  },
+  "homepage": "https://github.com/Dash-OS/aws-lambda-runner",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "cross-env": "^4.0.0",
+    "rimraf": "^2.6.1",
+    "webpack": "^2.5.1"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.4.0"
+  }
+}
