@@ -46,6 +46,8 @@ export default run(
 import run from 'aws-lambda-runner'
 
 export default run({
+  // Do we want the runner to log to cloudwatch (via console)
+  log: true,
   // default status code to return to the caller when using proxy integration.
   statusCode: 200,
   // do we want to add the 'Access-Control-Allow-Origin' header to our response?
@@ -71,19 +73,25 @@ export default run({
 
 #### Dynamic Configuration Values 
 
- - headers
- - cors
- - statusCode
+ - log (default: false) <_Boolean_|_Array_>
+  - "errors", "exceptions", "debug"
+ - headers (default: null) <_null_|_Object Literal_>
+ - cors | (default: false) <_Boolean_>
+ - statusCode (default: 200) <_Number_>
+ - errorCode (default: 400) <_Number_>
+ - errors (default: []) <_Array_>
+ - onError (default: null) <_null_|_Function_>
 
 #### Static Configuration Values
 
  - isProxy
  - request
- - query
+ - resource
+ - queries
  - path
  - method
- - pathParameters
- - stageVariables
+ - params (pathParameters)
+ - stage (stageVariables)
 
 ### Useful Links & Resources
 
