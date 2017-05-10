@@ -69,6 +69,8 @@ export default run({
 
 ### Configuration Object
 
+#### Dynamic Configuration Values 
+
  - headers
  - cors
  - statusCode
