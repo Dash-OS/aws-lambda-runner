@@ -26,6 +26,22 @@ npm install --save aws-lambda-runner
 
 ### Example
 
+#### Without Default Configuration
+
+```js
+import run from 'aws-lambda-runner'
+
+export default run(
+  async (body, config) => {
+    return {
+      hello: 'world'
+    }
+  }
+)
+```
+
+#### With Default Configuration
+
 ```js
 import run from 'aws-lambda-runner'
 
@@ -50,4 +66,8 @@ export default run({
   }
 })
 ```
+
+
+
+### Configuration Object
 
