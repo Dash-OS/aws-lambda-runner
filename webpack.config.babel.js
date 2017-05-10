@@ -1,12 +1,13 @@
 // NOTE: paths are relative to each functions folder
 import path from 'path';
 import Webpack from 'webpack';
+import BabiliPlugin from 'babili-webpack-plugin'
 
 export default {
   entry: [
     './lib/runner.js',
   ],
-  target: 'node',
+  target: 'async-node',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'runner.js',
@@ -41,6 +42,8 @@ export default {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    // if you'd rather use babili for your minification
+    // new BabiliPlugin(),
     new Webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
