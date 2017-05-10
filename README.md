@@ -74,7 +74,7 @@ export default run({
 #### Dynamic Configuration Values 
 
  - log (default: false) <_Boolean_|_Array_>
-  - "errors", "exceptions", "debug"
+   - "errors", "exceptions", "debug"
  - headers (default: null) <_null_|_Object Literal_>
  - cors | (default: false) <_Boolean_>
  - statusCode (default: 200) <_Number_>
