@@ -67,7 +67,18 @@ export default run({
 })
 ```
 
-
-
 ### Configuration Object
 
+ - headers
+ - cors
+ - statusCode
+
+#### Static Configuration Values
+
+ - isProxy
+ - request
+ - query
+ - path
+ - method
+ - pathParameters
+ - stageVariables
