@@ -84,3 +84,8 @@ export default run({
  - method
  - pathParameters
  - stageVariables
+
+### Useful Links & Resources
+
+ - [Webpack 2 / Apex / AWS Lambda Runner Example Project](https://github.com/Dash-OS/aws-lambda-runner-example)
+ - [apex.run (docs)](http://apex.run/)
