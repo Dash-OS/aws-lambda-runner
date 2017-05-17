@@ -9,6 +9,7 @@ library.
  - Pairs perfectly with the [apex](https://github.com/apex/apex) serverless solution.
  - Supports [Lambda Proxy Integrations](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-api-as-simple-proxy-for-lambda.html) w/ [API Gateway Proxy](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html#api-gateway-simple-proxy-for-lambda-input-format).
  - Provide custom headers & status codes to include with the response.
+ - Provide a 
  - Enable cors for the requests.
  - One function can handle methods and paths.
 
@@ -55,6 +56,10 @@ export default run({
   // do we want to add any headers to the response?  We can add new headers by
   // mutating the received config object
   headers: null,
+  // do we want to allow the lambda process to flush the event loop before it freezes
+  // this process? If false, all processing will be frozen immediately upon resolution 
+  // of the runner Promise (which calls our function below). (defaults: true)
+  awaitEventLoop: false
 }, async (body, config, ctx, cb) => {
   /*
     Handle our function, the resolution of the promise will be used to 
@@ -81,6 +86,7 @@ export default run({
  - errorCode (default: 400) <_Number_>
  - errors (default: []) <_Array_>
  - onError (default: null) <_null_|_Function_>
+ - awaitEventLoop (default: true) <_Boolean_>
 
 #### Static Configuration Values
 
