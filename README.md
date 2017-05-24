@@ -74,6 +74,90 @@ export default run({
 })
 ```
 
+### Plugins
+
+Lambda-Runner supports a simple plugin system which allows you to handle various 
+hooks during the lifecycle of your Lambda's execution.
+
+Plugins are classes which will be instatiated for each request.  One may optionally 
+pass settings to the plugin.
+
+Plugins can mutate the various objects.  This allows them to add functionality to 
+your requests such as adding response headers, formatting responses, or anything 
+they might want to accomplish.
+
+If a plugin returns a `Promise`, the promise will be resolved before continuing.
+
+#### Plugin Hooks
+
+ - onBuild
+ - onComplete
+
+#### Plugin Example
+
+Here is a very simple example of a plugin which attempts to capture the 
+authorizer claims and/or API Key that was used for the request and moves 
+the data into `config.auth`.
+
+##### Function
+
+```js
+export default run({
+  log: 'debug',
+  cors: true,
+  headers: null,
+  awaitEventLoop: false,
+  plugins: [
+    [ AuthorizerPlugin, {
+      removeAuthorizer: false
+    } ],
+    PromiseMapPlugin
+  ]
+}, async (body, config, ctx) => {
+  /* Your Function */
+}
+```
+
+##### Plugin
+
+```js
+const default_settings = () => ({
+  removeAuthorizer: true,
+  removeApiKey: false,
+})
+export default class AuthorizerPlugin {
+  constructor(settings) {
+    this.settings = settings || default_settings()
+  }
+  onBuild = (data, config) => {
+    config.auth = {
+      apiKey: null,
+      user: null,
+    }
+    const requestContext = config.request && config.request.requestContext
+    if ( requestContext ) {
+      config.user = 
+           requestContext.authorizer
+        && requestContext.authorizer.claims
+        || null
+      config.apiKey =
+        requestContext.identity
+        && requestContext.identity.apiKey
+        || null
+    }
+    if ( this.settings.removeAuthorizer === true && config.auth.user ) {
+      delete config.request.requestContext.authorizer
+    }
+    if ( this.settings.removeApiKey === true && config.auth.apiKey ) {
+      delete config.request.requestContext.identity.apiKey
+    }
+  }
+}
+```
+
+> New Hooks may be added over time.
+
+
 ### Configuration Object
 
 #### Dynamic Configuration Values 
