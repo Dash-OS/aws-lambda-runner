@@ -93,6 +93,8 @@ If a plugin returns a `Promise`, the promise will be resolved before continuing.
  - onBuild
  - onComplete
 
+> At some point we plan to add a few extra hooks such as "onError" and "onSuccess"
+
 #### Plugin Example
 
 Here is a very simple example of a plugin which attempts to capture the 
@@ -121,15 +123,17 @@ export default run({
 ##### Plugin
 
 ```js
+
 const default_settings = () => ({
   removeAuthorizer: true,
   removeApiKey: false,
 })
+
 export default class AuthorizerPlugin {
-  constructor(settings) {
-    this.settings = settings || default_settings()
+  constructor(settings = default_settings()) {
+    this.settings = settings
   }
-  onBuild = (data, config) => {
+  onBuild = (data, config, context, callback) => {
     config.auth = {
       apiKey: null,
       user: null,
@@ -155,33 +159,101 @@ export default class AuthorizerPlugin {
 }
 ```
 
-> New Hooks may be added over time.
-
-
 ### Configuration Object
 
 #### Dynamic Configuration Values 
 
- - log (default: false) <_Boolean_|_Array_>
+By mutating the `config` object (or setting the values in the runner configuration), 
+you can change how the request will be handled.  This allows you to set the response 
+code, add cors headers, add errors, and control the function.
+
+ - log (default: false) <_Boolean_|_Array_> - what level of runner logging should be performed?
    - "errors", "exceptions", "debug"
- - headers (default: null) <_null_|_Object Literal_>
- - cors | (default: false) <_Boolean_>
- - statusCode (default: 200) <_Number_>
- - errorCode (default: 400) <_Number_>
- - errors (default: []) <_Array_>
- - onError (default: null) <_null_|_Function_>
- - awaitEventLoop (default: true) <_Boolean_>
+ - headers (default: null) <_null_|_Object Literal_> - headers to include with the response.
+ - cors | (default: false) <_Boolean_> - should the "Access-Control-Allow-Origin" header be added to the response?
+ - statusCode (default: 200) <_Number_> - the default status code to respond with if the request is successful.
+ - errorCode (default: 400) <_Number_> - the default status code to respond with if errors are encountered.
+ - errors (default: []) <_Array_> - an array of errors that should be provided.  If any errors are pushed into this array, an error will be assumed.
+ - plugins (default: []) <_Array_> - provided in the initial runner configuration, plugins allow extending the capabilities of the runner through hooks.
+ - onError (default: null) <_null_|_Function_> - a function to allow extra handling of encountered errors.
+ - [awaitEventLoop](http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html) (default: true) <_Boolean_> - see the provided link, this controls context.callbackWaitsForEmptyEventLoop.
 
 #### Static Configuration Values
 
+These values are set internally on the config object.  Mutating these values will generally not affect the normal 
+operation of the runner (although it shouldn't be done as plugins may expect these values to be intact).
+
  - isProxy
- - request
  - resource
- - queries
  - path
- - method
+ - method 
+ - request
+ - client
+ - queries (url queries) 
  - params (pathParameters)
  - stage (stageVariables)
+
+> More Information will come about these values, here is a stringified example of the `config` object.
+
+```json
+{
+  "isProxy": true,
+  "resource": "/web/session",
+  "path": "/v2/web/session",
+  "method": "POST",
+  "log": "debug",
+  "statusCode": 200,
+  "cors": true,
+  "headers": null,
+  "errorCode": 400,
+  "awaitEventLoop": false,
+  "client": {
+    "agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+    "forwardedFor": [
+      "<masked-ip>",
+      "<masked-ip>"
+    ],
+    "forwardedPort": 443,
+    "country": "US",
+    "sourceIP": "<masked-ip>"
+  },
+  "queries": {
+    "version": "2.0",
+  },
+  "params": {
+    "user": "example_user",
+  },
+  "stage": null,
+  "errors": [],
+  "request": {
+    "requestContext": {
+      "path": "/v2/web/session",
+      "accountId": "<masked-account-id>",
+      "resourceId": "<masked-resource-id>",
+      "stage": "production",
+      "requestId": "63851d0d-40d1-11e7-9be4-d54b94333e61",
+      "identity": {
+        "cognitoIdentityPoolId": null,
+        "accountId": null,
+        "cognitoIdentityId": null,
+        "caller": null,
+        "apiKey": "<masked-api-key>",
+        "sourceIp": "<masked-ip>",
+        "accessKey": null,
+        "cognitoAuthenticationType": null,
+        "cognitoAuthenticationProvider": null,
+        "userArn": null,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+        "user": null
+      },
+      "resourcePath": "/web/session",
+      "httpMethod": "POST",
+      "apiId": "95r35czxwj"
+    },
+    "isBase64Encoded": false
+  }
+}
+```
 
 ### Useful Links & Resources
 
