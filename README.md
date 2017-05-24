@@ -124,27 +124,28 @@ export default run({
 
 ```js
 
-const default_settings = () => ({
+const build_settings = settings => ({
   removeAuthorizer: true,
   removeApiKey: false,
+  ...settings,
 })
 
 export default class AuthorizerPlugin {
-  constructor(settings = default_settings()) {
-    this.settings = settings
+  constructor(settings) {
+    this.settings = build_settings(settings)
   }
-  onBuild = (data, config, context, callback) => {
+  onBuild = (data, config) => {
     config.auth = {
       apiKey: null,
       user: null,
     }
     const requestContext = config.request && config.request.requestContext
     if ( requestContext ) {
-      config.user = 
+      config.auth.user = 
            requestContext.authorizer
         && requestContext.authorizer.claims
         || null
-      config.apiKey =
+      config.auth.apiKey =
         requestContext.identity
         && requestContext.identity.apiKey
         || null
