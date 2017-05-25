@@ -5,7 +5,7 @@ import PromiseMap from 'promise-map-es6'
   Adds a PromiseMap to our config under the 'promises' key which resolves and
   adds the resolved result to our response.
 */
-export default class LambdaPromiseMap {
+export default class PromiseMapPlugin {
   onBuild = (data, config) => {
     config.promises = new PromiseMap()
   }
