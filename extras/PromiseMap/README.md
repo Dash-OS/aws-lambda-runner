@@ -143,7 +143,7 @@ P.then(result => console.log(result))
 // after 10 seconds: { foo: 1, bar: 2, baz: 3 }
 ```
 
-**returns** ***Boolean*** *keys.every(k => Map.has(k))*
+**returns** ***undefined***
 
 #### PromiseMap.prototype.then(onResolve, onReject)
 
