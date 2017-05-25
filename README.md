@@ -9,7 +9,6 @@ library.
  - Pairs perfectly with the [apex](https://github.com/apex/apex) serverless solution.
  - Supports [Lambda Proxy Integrations](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-api-as-simple-proxy-for-lambda.html) w/ [API Gateway Proxy](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html#api-gateway-simple-proxy-for-lambda-input-format).
  - Provide custom headers & status codes to include with the response.
- - Provide a 
  - Enable cors for the requests.
  - One function can handle methods and paths.
 
@@ -100,6 +99,8 @@ If a plugin returns a `Promise`, the promise will be resolved before continuing.
 Here is a very simple example of a plugin which attempts to capture the 
 authorizer claims and/or API Key that was used for the request and moves 
 the data into `config.auth`.
+
+
 
 ##### Function
 

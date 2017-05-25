@@ -1,5 +1,5 @@
-// Requires PromiseMap from ../PromiseMap/PromiseMap
-import PromiseMap from 'PromiseMap'
+// https://github.com/Dash-OS/PromiseMap
+import PromiseMap from 'promise-map-es6'
 
 /*
   Adds a PromiseMap to our config under the 'promises' key which resolves and
