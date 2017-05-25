@@ -1,6 +1,6 @@
 # PromiseMap
 
-> **Note:** This documentation is unfinisehd and it will become its own package
+> **Note:** This documentation is unfinished and it will become its own package
 > once we have had the chance to complete it.  The package itself should be complete.
 
 ## Overview
