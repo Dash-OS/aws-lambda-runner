@@ -130,6 +130,21 @@ P.has('foo', 'bar', 'blah'); // false
 
 **returns** ***Boolean*** *keys.every(k => Map.has(k))*
 
+#### PromiseMap.prototype.push(...Promises)
+
+Adds promises that will be resolved when the `PromiseMap` is resolved, however, the 
+values will not be included in the resolved value.  This is helpful for situations that 
+you want to be sure various functions have completed before continuing, but don't want their 
+resolved values to affect the final object.
+
+```js
+P.push(timeoutPromised(() => 4, 10000))
+P.then(result => console.log(result))
+// after 10 seconds: { foo: 1, bar: 2, baz: 3 }
+```
+
+**returns** ***Boolean*** *keys.every(k => Map.has(k))*
+
 #### PromiseMap.prototype.then(onResolve, onReject)
 
 Resolves the entire PromiseMap and returns the result.  PromiseMap will be empty once completed. 
