@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-runner",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Better handling of AWS Lambda Functions.",
   "main": "dist/runner.js",
   "repository": {
