@@ -1,7 +1,7 @@
 # AWS Lambda Runner
 
 A tiny (2KB Compressed & Minified) wrapper utility to make running your
-aws lambda functions cleaner.  Inspired heavily/completely by the [node-apex](https://github.com/apex/node-apex) 
+aws lambda functions cleaner.  Inspired heavily/completely by the [node-apex](https://github.com/apex/node-apex)
 library.  
 
 ### Features
@@ -32,11 +32,9 @@ npm install --save aws-lambda-runner
 import run from 'aws-lambda-runner'
 
 export default run(
-  async (body, config) => {
-    return {
-      hello: 'world'
-    }
-  }
+  (body, config) => ({
+    hello: 'world'
+  })
 )
 ```
 
@@ -56,15 +54,15 @@ export default run({
   // mutating the received config object
   headers: null,
   // do we want to allow the lambda process to flush the event loop before it freezes
-  // this process? If false, all processing will be frozen immediately upon resolution 
+  // this process? If false, all processing will be frozen immediately upon resolution
   // of the runner Promise (which calls our function below). (defaults: true)
   awaitEventLoop: false
 }, async (body, config, ctx, cb) => {
   /*
-    Handle our function, the resolution of the promise will be used to 
-    populate the body.  This does not need to be an async function, we 
+    Handle our function, the resolution of the promise will be used to
+    populate the body.  This does not need to be an async function, we
     can return a standard object or promise to be resolved.  
-    
+
     Errors during execution are caught and passed to the caller.
   */
   return {
@@ -75,14 +73,14 @@ export default run({
 
 ### Plugins
 
-Lambda-Runner supports a simple plugin system which allows you to handle various 
+Lambda-Runner supports a simple plugin system which allows you to handle various
 hooks during the lifecycle of your Lambda's execution.
 
-Plugins are classes which will be instatiated for each request.  One may optionally 
+Plugins are classes which will be instatiated for each request.  One may optionally
 pass settings to the plugin.
 
-Plugins can mutate the various objects.  This allows them to add functionality to 
-your requests such as adding response headers, formatting responses, or anything 
+Plugins can mutate the various objects.  This allows them to add functionality to
+your requests such as adding response headers, formatting responses, or anything
 they might want to accomplish.
 
 If a plugin returns a `Promise`, the promise will be resolved before continuing.
@@ -96,8 +94,8 @@ If a plugin returns a `Promise`, the promise will be resolved before continuing.
 
 #### Plugin Example
 
-Here is a very simple example of a plugin which attempts to capture the 
-authorizer claims and/or API Key that was used for the request and moves 
+Here is a very simple example of a plugin which attempts to capture the
+authorizer claims and/or API Key that was used for the request and moves
 the data into `config.auth`.
 
 
@@ -123,10 +121,10 @@ export default run({
 
 ### Configuration Object
 
-#### Dynamic Configuration Values 
+#### Dynamic Configuration Values
 
-By mutating the `config` object (or setting the values in the runner configuration), 
-you can change how the request will be handled.  This allows you to set the response 
+By mutating the `config` object (or setting the values in the runner configuration),
+you can change how the request will be handled.  This allows you to set the response
 code, add cors headers, add errors, and control the function.
 
  - log (default: false) <_Boolean_|_Array_> - what level of runner logging should be performed?
@@ -143,16 +141,16 @@ code, add cors headers, add errors, and control the function.
 
 #### Static Configuration Values
 
-These values are set internally on the config object.  Mutating these values will generally not affect the normal 
+These values are set internally on the config object.  Mutating these values will generally not affect the normal
 operation of the runner (although it shouldn't be done as plugins may expect these values to be intact).
 
  - isProxy
  - resource
  - path
- - method 
+ - method
  - request
  - client
- - queries (url queries) 
+ - queries (url queries)
  - params (pathParameters)
  - stage (stageVariables)
 
