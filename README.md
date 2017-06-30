@@ -139,6 +139,7 @@ code, add cors headers, add errors, and control the function.
  - plugins (default: []) <_Array_> - provided in the initial runner configuration, plugins allow extending the capabilities of the runner through hooks.
  - onError (default: null) <_null_|_Function_> - a function to allow extra handling of encountered errors.
  - [awaitEventLoop](http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html) (default: true) <_Boolean_> - see the provided link, this controls context.callbackWaitsForEmptyEventLoop.
+ - methods (default: null) <_null_|_Array_> - an array of methods that should be accepted for this request.  If not defined, all will be accepted.
 
 #### Static Configuration Values
 

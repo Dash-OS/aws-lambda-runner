@@ -1,0 +1,43 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "arrow-parens": ["off"],
+    "compat/compat": "error",
+    "consistent-return": "off",
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-console": "off",
+    "no-multi-assign": "off",
+    "promise/param-names": "error",
+    "promise/always-return": "error",
+    "promise/catch-or-return": "error",
+    "promise/no-native": "off",
+    "react/sort-comp": ["error", {
+      "order": ["type-annotations", "static-methods", "lifecycle", "everything-else", "render"]
+    }],
+    "react/jsx-no-bind": "off",
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": "off",
+    "no-param-reassign": "off",
+    "no-restricted-syntax": "off",
+    "no-constant-condition": "off",
+    "no-confusing-arrow": "off",
+    "no-use-before-define": "off",
+    "no-underscore-dangle": "off"
+  },
+  "plugins": [
+    "import",
+    "promise",
+    "compat",
+    "react"
+  ]
+}

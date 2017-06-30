@@ -1,12 +1,10 @@
 // NOTE: paths are relative to each functions folder
 import path from 'path';
 import Webpack from 'webpack';
-import BabiliPlugin from 'babili-webpack-plugin'
+// import BabiliPlugin from 'babili-webpack-plugin';
 
 export default {
-  entry: [
-    './lib/runner.js',
-  ],
+  entry: ['./lib/runner.js'],
   target: 'async-node',
   output: {
     path: path.join(__dirname, 'dist'),
@@ -16,22 +14,27 @@ export default {
   module: {
     rules: [
       {
-        test:     /\.js$/,
+        test: /\.js$/,
         exclude: /node_modules/,
-        use:     [ {
-          loader: 'babel-loader' ,
-          options: {
-            // Don't use the babelrc file!
-            babelrc: false,
-            presets: [
-              'stage-0',
-              // Setup for TreeShaking
-              ['env', {
-                modules: false,
-              }],
-            ],
-          }
-        } ],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              // Don't use the babelrc file!
+              babelrc: false,
+              presets: [
+                'stage-0',
+                // Setup for TreeShaking
+                [
+                  'env',
+                  {
+                    modules: false,
+                  },
+                ],
+              ],
+            },
+          },
+        ],
       },
     ],
   },
@@ -71,4 +74,4 @@ export default {
       },
     }),
   ],
-}
+};
