@@ -5,17 +5,18 @@ import RunnerPluginTest from './plugins/runner-plugin-test';
 
 export default run(
   {
+    settings: {
+      log: true,
+    },
     response: {
       headers: {
         Foo: 'bar',
       },
     },
-    settings: {
-      log: true,
-    },
-    plugins: [RunnerPluginTest],
+
+    plugins: [[RunnerPluginTest, {}], RunnerPluginTest],
   },
-  (data, config) => {
+  (data: { body: string }, config) => {
     console.log('Config: ', config);
     console.log('Data: ', data);
     return {

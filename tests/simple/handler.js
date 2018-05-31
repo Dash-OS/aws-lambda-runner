@@ -1,5 +1,7 @@
+/* @flow */
+
 import run from '../../lib/runner';
 
-export default run(() => ({
+export default run({}, () => ({
   result: 'success',
 }));

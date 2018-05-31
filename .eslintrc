@@ -5,7 +5,7 @@
     "sourceType": "module",
     "allowImportExportEverywhere": false
   },
-  "extends": ["plugin:flowtype/recommended", "airbnb-base"],
+  "extends": ["airbnb-base", "plugin:flowtype/recommended"],
   "env": {
     "node": true
   },
@@ -34,7 +34,6 @@
     "flowtype/boolean-style": [2, "boolean"],
     "flowtype/define-flow-type": 1,
     "flowtype/delimiter-dangle": [2, "never"],
-    "flowtype/generic-spacing": [2, "never"],
     "flowtype/no-primitive-constructor-types": 2,
     "flowtype/no-weak-types": 0,
     "flowtype/object-type-delimiter": [2, "comma"],

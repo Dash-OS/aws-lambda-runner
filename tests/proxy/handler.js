@@ -1,18 +1,14 @@
+/* @flow */
 import run from '../../lib/runner';
 
 export default run(
   {
     settings: {
-      log: 'debug',
-    },
-    response: {
-      headers: {
-        Foo: 'bar',
-      },
+      log: true,
     },
   },
-  (data, config) => {
-    console.log('Config: ', config);
+  async (data, config) => {
+    console.log('Config: ', config.settings.log);
     console.log('Data: ', data);
     return {
       result: 'success',

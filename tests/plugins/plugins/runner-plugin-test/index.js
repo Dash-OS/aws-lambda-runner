@@ -6,13 +6,16 @@ type PluginSettings = {|
   foo: 'bar'
 |};
 
+const getPluginSettings = (settings: $Shape<PluginSettings>): PluginSettings => ({
+  foo: settings.foo || 'bar',
+});
+
 class RunnerPluginTest extends Plugin<PluginSettings> {
   settings: PluginSettings;
 
-  constructor(settings: PluginSettings) {
+  constructor(settings?: $Shape<PluginSettings> = {}) {
     super(settings);
-    console.log('Plugin Constructed with Settings: ', settings);
-    this.settings = settings;
+    this.settings = getPluginSettings(settings);
   }
 
   onExecute = () => console.log('EXECUTING!');
