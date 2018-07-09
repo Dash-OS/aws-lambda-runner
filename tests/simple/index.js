@@ -4,3 +4,6 @@ import handler from './handler';
 console.log('Calling Handler');
 
 handler(data.simple, context.simple, callback);
+handler(data.simple, context.simple, callback);
+handler(data.simple, context.simple, callback);
+handler(data.simple, context.simple, callback);

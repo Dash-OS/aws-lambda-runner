@@ -12,16 +12,16 @@ const rootDir = getRootDir.get();
 console.log('ROOT ', rootDir);
 
 export default {
-  context: rootDir,
+  /* Main addition to Webpack 4, provides zero-config presets for production / development */
+  mode: 'production',
 
-  /* Do Not Change */
-  entry: ['./lib/runner.js'],
+  context: rootDir,
 
   /* Used so that we resolve files using async fs instead of node require() */
   target: 'async-node',
 
-  /* Main addition to Webpack 4, provides zero-config presets for production / development */
-  mode: 'production',
+  /* Do Not Change */
+  entry: ['./lib/runner.js'],
 
   /* aws-sdk included in lambda so we dont want to expect that it is packaged */
   externals: ['aws-sdk'],
@@ -46,26 +46,17 @@ export default {
                   '@babel/preset-env',
                   {
                     useBuiltIns: 'usage',
+                    shippedProposals: true,
                     modules: false, // needed for tree-shaking
                     targets: {
-                      node: '6.10', // current lambda runtime
+                      node: '8.10', // current lambda runtime
                     },
                   },
                 ],
                 /* Fun */
                 '@babel/preset-stage-0',
               ],
-              plugins: [
-                // [
-                //   '@babel/plugin-transform-runtime',
-                //   {
-                //     helpers: false,
-                //     polyfill: false,
-                //     regenerator: false,
-                //   },
-                // ],
-                'lodash',
-              ],
+              plugins: ['lodash'],
             },
           },
         ],

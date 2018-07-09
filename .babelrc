@@ -1,17 +1,16 @@
 {
-	"presets": [
-		"@babel/preset-flow",
-		[
-			"@babel/preset-env",
-			{
-				"cacheDirectory": true,
-				"useBuiltIns": "usage",
-				"targets": {
-					"node": "6.10"
-				}
-			}
-		],
-		"@babel/preset-stage-0"
-	],
-	"plugins": ["transform-optional-chaining"]
+  "presets": [
+    "@babel/preset-flow",
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "shippedProposals": true,
+        "targets": {
+          "node": "8.10"
+        }
+      }
+    ]
+  ],
+  "plugins": ["lodash", "@babel/plugin-proposal-class-properties"]
 }

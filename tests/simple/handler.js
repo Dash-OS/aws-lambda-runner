@@ -1,7 +1,14 @@
 /* @flow */
 
-import run from '../../lib/runner';
+import run from '../../dist/runner';
 
-export default run({}, () => ({
-  result: 'success',
-}));
+export default run(
+  {
+    settings: {
+      log: true,
+    },
+  },
+  () => ({
+    result: 'success',
+  })
+);

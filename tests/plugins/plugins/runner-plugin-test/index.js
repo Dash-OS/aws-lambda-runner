@@ -3,7 +3,7 @@
 import Plugin from '../../../../lib/plugin';
 
 type PluginSettings = {|
-  foo: 'bar'
+  foo: 'bar',
 |};
 
 const getPluginSettings = (settings: $Shape<PluginSettings>): PluginSettings => ({

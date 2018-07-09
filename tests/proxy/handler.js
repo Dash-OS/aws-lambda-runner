@@ -13,5 +13,5 @@ export default run(
     return {
       result: 'success',
     };
-  },
+  }
 );

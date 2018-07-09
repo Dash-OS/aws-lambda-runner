@@ -14,7 +14,7 @@ export default run(
       },
     },
 
-    plugins: [[RunnerPluginTest, {}], RunnerPluginTest],
+    plugins: [RunnerPluginTest, [RunnerPluginTest, { foo: 'bar' }]],
   },
   (data: { body: string }, config) => {
     console.log('Config: ', config);
@@ -22,5 +22,5 @@ export default run(
     return {
       result: 'success',
     };
-  },
+  }
 );
