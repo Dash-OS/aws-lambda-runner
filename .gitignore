@@ -4,6 +4,5 @@ node_modules
 npm-debug.log
 dist
 .git
-yarn.lock
 .webpack
 flow-typed
