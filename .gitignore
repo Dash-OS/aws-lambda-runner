@@ -6,3 +6,4 @@ dist
 .git
 yarn.lock
 .webpack
+flow-typed
