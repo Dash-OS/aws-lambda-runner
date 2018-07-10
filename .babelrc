@@ -1,16 +1,17 @@
 {
-  "presets": [
+  presets: [
     "@babel/preset-flow",
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": "usage",
-        "shippedProposals": true,
-        "targets": {
-          "node": "8.10"
+        debug: true,
+        useBuiltIns: "usage",
+        include: ["es7.promise.finally", "es7.symbol.async-iterator", "es6.array.sort"],
+        targets: {
+          node: "8.10"
         }
       }
     ]
   ],
-  "plugins": ["lodash", "@babel/plugin-proposal-class-properties"]
+  plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime"]
 }
