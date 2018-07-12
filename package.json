@@ -1,6 +1,6 @@
 {
   "name": "aws-lambda-runner",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Better handling of AWS Lambda Functions.",
   "main": "dist/runner.js",
   "repository": {
@@ -17,7 +17,13 @@
     "prepublishOnly": "npm-run-all build:prod",
     "try": "babel-node ./test.js"
   },
-  "keywords": ["aws", "lambda", "apex", "serverless", "api-gateway"],
+  "keywords": [
+    "aws",
+    "lambda",
+    "apex",
+    "serverless",
+    "api-gateway"
+  ],
   "author": "Braden R. Napier <brady.napier@dashos.net>",
   "license": "MIT",
   "bugs": {
