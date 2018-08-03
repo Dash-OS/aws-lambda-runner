@@ -12,6 +12,7 @@ export default run(
     console.log('Data: ', data);
     return {
       result: 'success',
+      data,
     };
   }
 );

@@ -14,10 +14,11 @@ export default run(
       },
     },
 
-    plugins: [RunnerPluginTest, [RunnerPluginTest, { foo: 'bar' }]],
+    plugins: [[RunnerPluginTest, { stateID: 'slack', foo: 'bar' }]],
   },
   (data: { body: string }, config) => {
-    console.log('Config: ', config);
+    const { payload } = config.state.slack;
+    console.log('Config: ', config.state);
     console.log('Data: ', data);
     return {
       result: 'success',
