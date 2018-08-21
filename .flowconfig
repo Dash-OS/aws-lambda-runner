@@ -1,8 +1,17 @@
 [libs]
-dev/flow/libs/
+dev/flow/definitions/
 
 [ignore]
-<PROJECT_ROOT>/.junk/
+\.junk/
+
+[lints]
+all=warn
+unnecessary-optional-chain=error
+unnecessary-invariant=error
+untyped-type-import=error
+sketchy-null=off
+sketchy-number=error
+unclear-type=off
 
 [options]
 include_warnings=true

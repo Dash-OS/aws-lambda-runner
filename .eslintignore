@@ -41,3 +41,4 @@ internals/flow/*
 .idea
 npm-debug.log.*
 __snapshots__
+dist/

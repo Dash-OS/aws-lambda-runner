@@ -1,3 +1,4 @@
+/* @flow */
 export const data = {
   simple: {
     foo: 'bar',
@@ -125,10 +126,22 @@ export const data = {
 export const context = {
   simple: {
     getRemainingTimeInMillis: () => 999999,
+    callbackWaitsForEmptyEventLoop: true,
+    functionName: 'Mockup',
+    functionVersion: '1.0',
+    invokedFunctionArn: 'arn:function:mockup',
+    logGroupName: 'mockup:log:group:name',
+    memoryLimitInMB: 'NA',
+    awsRequestId: 'mockup:requestId',
+    logStreamName: 'mockup:logstream:name',
+    identity: null,
   },
 };
 
-export const callback = (err, response) => {
+export const callback = (
+  err: Error | string | $Subtype<Error> | { name: string, message: string } | null,
+  response?: any
+) => {
   if (err) {
     console.error('[ERROR OCCURRED] | ', err);
     return;

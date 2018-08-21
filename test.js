@@ -1,2 +1,2 @@
 /* @flow */
-import './tests/plugins';
+import './tests/simple';

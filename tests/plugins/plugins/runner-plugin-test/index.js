@@ -1,48 +1,49 @@
 /* @flow */
+import util from 'util';
 
-import Plugin from '../../../../lib/plugin';
+import type { Runner$PluginInterface } from '../../../../lib/types/runner';
 
-type PluginSettings = {|
-  stateID: 'test' | string,
-  foo: 'bar',
-|};
+const wait = setTimeout[util.promisify.custom];
 
-// when a plugin will provide values for the executing
-// function, it provides a "state" object so that we can
-// provide type safety to the user
-type PluginState = {|
-  active: boolean,
-|};
+let i = 0;
 
-const getPluginSettings = (settings: PluginSettings): PluginSettings => ({
-  stateID: settings.stateID || 'test',
-  foo: settings.foo || 'bar',
-});
+const start = Date.now();
 
-class RunnerPluginTest extends Plugin<PluginSettings, PluginState> {
-  stateID: $PropertyType<PluginSettings, 'stateID'>;
-  settings: PluginSettings;
-  state: PluginState;
+const RunnerPluginTestFactory = (id: string): Runner$PluginInterface => {
+  let n = i;
+  i += 1;
+  let isError = false;
+  let cancelPromise;
+  let timeoutID;
 
-  constructor(settings?: $Shape<PluginSettings> = {}) {
-    super(settings);
-    this.settings = getPluginSettings(settings);
-    this.stateID = this.settings.stateID;
-    this.state = {
-      active: true,
-    };
-  }
-
-  onExecute = (data, config) => {
-    this.state = {
-      active: false,
-    };
-    config.state[this.stateID] = this.state;
+  return {
+    onExecute() {
+      return new Promise((resolve, reject) => {
+        cancelPromise = reject;
+        // if (id === 'two') {
+        //   return reject(Error('Death'));
+        // }
+        timeoutID = setTimeout(() => {
+          console.log('onExecute: ', id, n, Date.now() - start);
+          resolve();
+        }, 5000);
+      });
+    },
+    async onComplete() {
+      if (!isError) {
+        await wait(5000);
+        console.log('onComplete: ', id, n, Date.now() - start);
+      }
+    },
+    async onError() {
+      isError = true;
+      console.log('onError: ', id, n, Date.now() - start);
+      clearTimeout(timeoutID);
+      if (cancelPromise) {
+        // cancelPromise(id);
+      }
+    },
   };
+};
 
-  onComplete = () => console.log('COMPLETE!');
-
-  onError = () => console.error('ERROR!');
-}
-
-export default RunnerPluginTest;
+export default RunnerPluginTestFactory;
