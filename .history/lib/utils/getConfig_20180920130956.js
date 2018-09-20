@@ -94,13 +94,13 @@ const getRuntimeConfig = (config: Runner$Config): Runner$RuntimeConfig =>
       path: config.request && config.request.path,
       method: config.request && config.request.method,
       resource: config.request && config.request.resource,
-      headers: (config.request && { ...(config.request.headers || {}) }) || {},
+      headers: (config.request && config.request.headers) || {},
       // received queries ?foo=bar&baz=qux
-      queries: (config.request && { ...(config.request.queries || {}) }) || {},
+      queries: (config.request && { ...config.request.queries || {} }) || {},
       // received parameters /{param1}/{param2}
-      params: (config.request && { ...(config.request.params || {}) }) || {},
+      params: (config.request && config.request.params) || {},
       // received stage variables
-      stage: (config.request && { ...(config.request.stage || {}) }) || {},
+      stage: (config.request && config.request.stage) || {},
     },
 
     handlers: config.handlers,

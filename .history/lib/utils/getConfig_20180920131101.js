@@ -100,7 +100,7 @@ const getRuntimeConfig = (config: Runner$Config): Runner$RuntimeConfig =>
       // received parameters /{param1}/{param2}
       params: (config.request && { ...(config.request.params || {}) }) || {},
       // received stage variables
-      stage: (config.request && { ...(config.request.stage || {}) }) || {},
+      stage: (config.request && config.request.stage) || {},
     },
 
     handlers: config.handlers,
