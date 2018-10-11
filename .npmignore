@@ -2,3 +2,5 @@ yarn.lock
 notebook
 .git
 extras
+\.junk/
+\.history/

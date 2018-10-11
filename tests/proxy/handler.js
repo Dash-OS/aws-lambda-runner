@@ -4,6 +4,7 @@ import run from '../../lib/runner';
 export default run(
   {
     settings: {
+      cors: true,
       log: true,
     },
   },

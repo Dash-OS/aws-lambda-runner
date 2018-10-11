@@ -2,7 +2,10 @@
 dev/flow/definitions/
 
 [ignore]
-\.junk/
+.*/\.junk/.*
+.*/\.history/.*
+<PROJECT_ROOT>/\.history/.*
+
 
 [lints]
 all=warn
@@ -14,7 +17,7 @@ sketchy-number=error
 unclear-type=off
 
 [options]
-include_warnings=true
+; include_warnings=true
 emoji=true
 
 esproposal.class_static_fields=enable

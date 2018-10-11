@@ -38,6 +38,8 @@ flow-typed/npm/*
 flow-typed/*
 internals/flow/*
 
+\.history/*
+
 .idea
 npm-debug.log.*
 __snapshots__
