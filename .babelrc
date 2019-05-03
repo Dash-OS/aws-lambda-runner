@@ -1,20 +1,21 @@
 {
   presets: [
-    "@babel/preset-flow",
+    '@babel/preset-flow',
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
-        useBuiltIns: "usage",
+        useBuiltIns: 'usage',
+        corejs: '3',
         include: [
-          "es7.promise.finally",
-          "es7.symbol.async-iterator",
-          "es6.array.sort"
+          'es7.promise.finally',
+          'es7.symbol.async-iterator',
+          'es6.array.sort',
         ],
         targets: {
-          node: "8.10"
-        }
-      }
-    ]
+          node: '8.10',
+        },
+      },
+    ],
   ],
-  plugins: ["@babel/plugin-transform-runtime"]
+  plugins: ['@babel/plugin-transform-runtime'],
 }
