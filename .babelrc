@@ -4,13 +4,10 @@
     [
       '@babel/preset-env',
       {
+        debug: true,
         useBuiltIns: 'usage',
+        shippedProposals: true,
         corejs: '3',
-        include: [
-          'es7.promise.finally',
-          'es7.symbol.async-iterator',
-          'es6.array.sort',
-        ],
         targets: {
           node: '8.10',
         },
